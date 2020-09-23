@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>search</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style type="text/css" media="screen">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+            padding: 3px;
+        }
+
+        #searchMsg {
+            width: 540px;
+            height: 34px;
+            vertical-align: top;
+            font-size: 14px;
+            padding-left: 3px;
+        }
+
+        li:hover {
+            background-color: rgb(168, 213, 252);
+            cursor: default;
+        }
+
+        ul li:first-child {
+            margin-top: 0;
+        }
+
+        ul {
+            border: 1px solid #b6b6b6;
+            border-top: 0px;
+            display: none;
+        }
+
+        #btn {
+            color: #fff;
+            line-height: 38px;
+            padding: 0 8px;
+            font-size: 14px;
+            display: inline-block;
+            height: 38px;
+            background: #db1c2c;
+            cursor: pointer;
+        }
+
+        .searchbar {
+            font-size: 0;
+        }
+
+        .search {
+            left: 5%;
+            top: 2%;
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class=" position-relative container-lg px-md-2">
+        <div class="search py-md-3">
+            <div class="searchbar">
+                <label style="font-size: 30px; color: rgb(20, 1, 3); margin-right: 50px;">Code
+                    Search</label>
+                <input type="text" id="searchMsg">
+                <span id="btn">SEARCH</span>
+            </div>
+            <ul id="list">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <div class="col-md-3 float-left px-md-2">
+            <div class="border p-3 mb-3">
+                <h2>
+                    Languages
+                </h2>
+                <li>C</li>
+                <li>Java</li>
+                <li>C++</li>
+                <li>go</li>
+                <li>c#</li>
+            </div>
+            <div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <div class=" col-12 col-md-9 float-left px-md-2">
+            <div class="position-relative pb-3">
+                <h3 id="result-num">
+                    2,137,147 code results
+                </h3>
+            </div>
+            <div>
+                <div id="code_search_results" class="code-list">
+                    <!--
+                    <div class=" py-4">
+                        <div class=" width-full">
+                            <div class=" flex-shrink-0 text-bold text-small">
+                                <a class="link-gray" href="/ParagDrunkenMonster/PanduEngine">
+                                    ParagDrunkenMonster/PanduEngine
+                                </a>
+                            </div>
+                            <div class=" f4 text-normal">
+                                <a title="boost_1_65_1/boost_1_65_1/libs/fiber/test/test_fss_dispatch.cpp"
+                                    data-hydro-click="{&quot;event_type&quot;:&quot;search_result.click&quot;,&quot;payload&quot;:{&quot;page_number&quot;:1,&quot;per_page&quot;:10,&quot;query&quot;:&quot;fss&quot;,&quot;result_position&quot;:1,&quot;click_id&quot;:74749406,&quot;result&quot;:{&quot;id&quot;:74749406,&quot;global_relay_id&quot;:&quot;MDEwOlJlcG9zaXRvcnk3NDc0OTQwNg==&quot;,&quot;model_name&quot;:&quot;Repository&quot;,&quot;url&quot;:&quot;https://github.com/ParagDrunkenMonster/PanduEngine/blob/176ea70826ad12dfc75c6943cd093317dee6e2bf/boost_1_65_1/boost_1_65_1/libs/fiber/test/test_fss_dispatch.cpp&quot;},&quot;originating_url&quot;:&quot;https://github.com/search?q=fss&amp;type=code&quot;,&quot;user_id&quot;:3184626}}"
+                                    data-hydro-click-hmac="43a00e904f78522f62a3aa7336e1d37c56e4e1ee4064c47bee751b243b2b1f68"
+                                    href="/ParagDrunkenMonster/PanduEngine/blob/176ea70826ad12dfc75c6943cd093317dee6e2bf/boost_1_65_1/boost_1_65_1/libs/fiber/test/test_fss_dispatch.cpp">boost_1_65_1/boost_1_65_1/libs/fiber/test/test_fss_dispatch.cpp</a>
+                            </div>
+                            <div class=" file-box blob-wrapper my-1">
+                                <table class="highlight">
+                                    <tbody>
+                                        <tr>
+                                            <td class="blob-num">
+                                                <a
+                                                    href="/ParagDrunkenMonster/PanduEngine/blob/176ea70826ad12dfc75c6943cd093317dee6e2bf/boost_1_65_1/boost_1_65_1/libs/fiber/test/test_fss_dispatch.cpp#L16">16</a>
+                                            </td>
+                                            <td class="blob-code blob-code-inner">boost::fibers::mutex <span
+                                                    class="text-bold bg-yellow-light rounded-1 d-inline-block">fss</span>_mutex;
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="blob-num">
+                                                <a
+                                                    href="/ParagDrunkenMonster/PanduEngine/blob/176ea70826ad12dfc75c6943cd093317dee6e2bf/boost_1_65_1/boost_1_65_1/libs/fiber/test/test_fss_dispatch.cpp#L17">17</a>
+                                            </td>
+                                            <td class="blob-code blob-code-inner"><span class="pl-k">int</span> <span
+                                                    class="text-bold bg-yellow-light rounded-1 d-inline-block">fss</span>_instances
+                                                = <span class="pl-c1">0</span>;</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="blob-num">
+                                                <a
+                                                    href="/ParagDrunkenMonster/PanduEngine/blob/176ea70826ad12dfc75c6943cd093317dee6e2bf/boost_1_65_1/boost_1_65_1/libs/fiber/test/test_fss_dispatch.cpp#L18">18</a>
+                                            </td>
+                                            <td class="blob-code blob-code-inner"><span class="pl-k">int</span> <span
+                                                    class="text-bold bg-yellow-light rounded-1 d-inline-block">fss</span>_total
+                                                = <span class="pl-c1">0</span>;</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="blob-num">
+                                                <a
+                                                    href="/ParagDrunkenMonster/PanduEngine/blob/176ea70826ad12dfc75c6943cd093317dee6e2bf/boost_1_65_1/boost_1_65_1/libs/fiber/test/test_fss_dispatch.cpp#L19">19</a>
+                                            </td>
+                                            <td class="blob-code blob-code-inner">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="blob-num">
+                                                <a
+                                                    href="/ParagDrunkenMonster/PanduEngine/blob/176ea70826ad12dfc75c6943cd093317dee6e2bf/boost_1_65_1/boost_1_65_1/libs/fiber/test/test_fss_dispatch.cpp#L20">20</a>
+                                            </td>
+                                            <td class="blob-code blob-code-inner"><span class="pl-k">struct</span> <span
+                                                    class="pl-en"><span
+                                                        class="text-bold bg-yellow-light rounded-1 d-inline-block">fss</span>_value_t</span>
+                                                {</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="blob-num">
+                                                <a
+                                                    href="/ParagDrunkenMonster/PanduEngine/blob/176ea70826ad12dfc75c6943cd093317dee6e2bf/boost_1_65_1/boost_1_65_1/libs/fiber/test/test_fss_dispatch.cpp#L21">21</a>
+                                            </td>
+                                            <td class="blob-code blob-code-inner"> <span class="pl-en"><span
+                                                        class="text-bold bg-yellow-light rounded-1 d-inline-block">fss</span>_value_t</span>()
+                                                {</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="blob-num">
+                                                <a
+                                                    href="/ParagDrunkenMonster/PanduEngine/blob/176ea70826ad12dfc75c6943cd093317dee6e2bf/boost_1_65_1/boost_1_65_1/libs/fiber/test/test_fss_dispatch.cpp#L22">22</a>
+                                            </td>
+                                            <td class="blob-code blob-code-inner">
+                                                std::unique_lock&lt;boost::fibers::mutex&gt; <span
+                                                    class="pl-c1">lock</span>(<span
+                                                    class="text-bold bg-yellow-light rounded-1 d-inline-block">fss</span>_mutex);
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="blob-num">
+                                                <a
+                                                    href="/ParagDrunkenMonster/PanduEngine/blob/176ea70826ad12dfc75c6943cd093317dee6e2bf/boost_1_65_1/boost_1_65_1/libs/fiber/test/test_fss_dispatch.cpp#L23">23</a>
+                                            </td>
+                                            <td class="blob-code blob-code-inner"> ++<span
+                                                    class="text-bold bg-yellow-light rounded-1 d-inline-block">fss</span>_instances;
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        -->
+                    <!--
+                    <div class=" d-flex flex-wrap text-small text-gray">
+                        <span class="match-count mr-3">
+                            Showing the top seven matches
+                        </span>
+                        <span class="updated-at mr-3">
+                            Last indexed <relative-time datetime="2020-04-04T10:26:17Z" class="no-wrap"
+                                title="2020年4月4日 GMT+8 下午6:26">on 4 Apr</relative-time>
+                        </span>
+                    </div>
+                -->
+                </div>
+                <div class="paginate-container codesearch-pagination-container">
+                    <div role="navigation" aria-label="Pagination" class="d-flex d-md-inline-block pagination"
+                        data-pjax="true">
+                        <span class="previous_page disabled">Previous</span> <em class="current"
+                            data-total-pages="100">1</em>
+                        <a rel="next" aria-label="Page 2" href="/search?p=2&amp;q=boost&amp;type=Code">2</a> <a
+                            aria-label="Page 3" href="/search?p=3&amp;q=boost&amp;type=Code">3</a> <a
+                            aria-label="Page 4" href="/search?p=4&amp;q=boost&amp;type=Code">4</a> <a
+                            aria-label="Page 5" href="/search?p=5&amp;q=boost&amp;type=Code">5</a> <span
+                            class="gap">…</span> <a aria-label="Page 99"
+                            href="/search?p=99&amp;q=boost&amp;type=Code">99</a> <a aria-label="Page 100"
+                            href="/search?p=100&amp;q=boost&amp;type=Code">100</a> <a class="next_page" rel="next"
+                            href="/search?p=2&amp;q=boost&amp;type=Code">Next </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script>
+            var searchMsg = document.getElementById("searchMsg");
+            var list = document.getElementById("list");
+            var btn = document.getElementById("btn");
+            var url = 'https://api.github.com/search/code?q=';
+            var param = getQueryVariable("search");
+
+
+
+            //监听输入框的keuup事件，
+            /*
+            searchMsg.onkeyup = function () {
+                if (this.value) {
+                    show(list);
+                    // 动态创建script标签，使用百度提供的接口，将查询字符串编码后，写到src当中
+                    var s = document.createElement('script');
+                    s.src = 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=' + encodeURI(this.value.trim()) + '&json=1&p=3&sid=1457_21105_17001_22158&req=2&csor=1&pwd=7&cb=fn';
+                    // 插入到文档后获取jsonp格式的数据，然后调用callback函数，将data数据以参数的形式传入
+                    document.body.appendChild(s);
+                } else {
+                    hide(list);
+                }
+            }
+     
+            //点击li标签后把输入框的信息填入到文本框
+            list.onclick = function (e) {
+                var e = e || window.event;
+                var target = e.target || e.srcElement;
+                if (target.nodeName == "LI") {
+                    searchMsg.value = target.innerHTML;
+                }
+                hide(list)
+            }
+            */
+
+            function getQueryVariable(variable) {
+                var query = window.location.search.substring(1);
+                var vars = query.split("&");
+                for (var i = 0; i < vars.length; i++) {
+                    var pair = vars[i].split("=");
+                    if (pair[0] == variable) { return pair[1]; }
+                }
+                return (false);
+            }
+
+            /*
+            $().ready(function () {
+                $("#searchMsg").val(param);
+                var tmp = url + param + "+in:file&access_token=17b86ea30b7bffb57931f0d7c8579f1626b1c72f";
+     
+                $.ajax({
+                    url: tmp,
+                    headers: {
+                        Accept: "application/vnd.github.v3.text-match+json"
+                    },
+                    type: "get",
+                    success: function (data) {
+                        alert(JSON.stringify(data));
+                    }
+                });
+            })
+            */
+            //点击百度一下按钮跳转到相应的页面
+            btn.onclick = function () {
+                $("#searchMsg").val(param);
+                var tmp = url + param + "+in:file&page=20&per_page=10";
+
+                $.ajax({
+                    url: tmp,
+                    headers: {
+                        Accept: "application/vnd.github.v3.text-match+json"
+                    },
+                    type: "get",
+                    success: function (data) {
+                        /* 保存本地文件用于调试，IE支持
+                        var fso;
+                        try {
+                            fso = new ActiveXObject("Scripting.FileSystemObject");
+                        } catch (e) {
+                            alert("当前浏览器不支持");
+                            return;
+                        }
+                        var f1 = fso.createtextfile("E:\\json.txt", true);
+                        f1.write(JSON.stringify(data));
+                        */
+                        var jsonObj = data;
+                        document.getElementById("result-num").innerHTML = jsonObj.total_count + " code results";
+                        for (x in jsonObj.items) {
+                            var item = jsonObj.items[x];
+                            var root = document.createElement("div");
+                            root.classList.add("py-4");
+                            var subRoot = document.createElement("div");
+                            subRoot.classList.add("width-full");
+                            // repo
+                            var repoDiv = document.createElement("div");
+                            repoDiv.classList.add("flex-shrink-0", "text-bold", "text-small");
+                            var repoHerf = document.createElement("a");
+                            var linkText = document.createTextNode(item.repository.full_name);
+                            repoHerf.appendChild(linkText);
+                            repoHerf.classList.add("link-gray");
+                            repoHerf.href = item.repository.html_url;
+                            repoDiv.appendChild(repoHerf);
+                            subRoot.appendChild(repoDiv);
+
+                            // path
+                            var pathDiv = document.createElement("div");
+                            pathDiv.classList.add("f4", "text-normal");
+                            var filePath = document.createElement("a");
+                            var alinkText = document.createTextNode(item.path);
+                            filePath.appendChild(alinkText);
+                            filePath.href = item.html_url;
+                            pathDiv.appendChild(filePath);
+                            subRoot.appendChild(pathDiv);
+
+                            // text match
+                            var textDiv = document.createElement("div");
+                            textDiv.classList.add("file-box", "blob-wrapper", "my-1");
+                            var textTable = document.createElement("Table");
+                            var textTbody = document.createElement("Tbody");
+                            for (y in item.text_matches) {
+                                var tr = document.createElement("tr");
+                                var td = document.createElement("td");
+                                td.classList.add("blob-code", "blob-code-inner");
+                                var tdText = document.createTextNode(item.text_matches[y].fragment);
+                                td.appendChild(tdText)
+                                tr.appendChild(td);
+                                textTbody.appendChild(tr);
+                            }
+                            textTable.appendChild(textTbody);
+                            textDiv.appendChild(textTable);
+                            subRoot.appendChild(textDiv);
+
+                            root.appendChild(subRoot);
+                            document.getElementById("code_search_results").appendChild(root);
+                        }
+                    }
+                });
+            }
+
+
+            function fn(data) {
+                var lis = document.querySelectorAll('li');
+                //这时候遍历查询到的信息，放到li标签当中
+                data.s.forEach(function (item, index) {
+                    lis[index].innerHTML = item;
+                });
+
+                // 获取到数据后，把脚本删除
+                var s = document.querySelectorAll('script');
+                for (var i = 1, len = s.length; i < len; i++) {
+                    document.body.removeChild(s[i]);
+                }
+            }
+
+            function hide(obj) {
+                obj.style.display = "none"
+            }
+
+            function show(obj) {
+                obj.style.display = "block"
+            }
+        </script>
+</body>
+
+</html>

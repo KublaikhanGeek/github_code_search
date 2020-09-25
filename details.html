@@ -286,7 +286,7 @@
             /*
             $().ready(function () {
                 $("#searchMsg").val(param);
-                var tmp = url + param + "+in:file&access_token=17b86ea30b7bffb57931f0d7c8579f1626b1c72f";
+                var tmp = url + param + "+in:file";
      
                 $.ajax({
                     url: tmp,
@@ -303,7 +303,7 @@
             //点击百度一下按钮跳转到相应的页面
             btn.onclick = function () {
                 $("#searchMsg").val(param);
-                var tmp = url + param + "+in:file&page=20&per_page=10";
+                var tmp = url + param + "+in:file&page=0&per_page=10";
 
                 $.ajax({
                     url: tmp,
@@ -324,9 +324,18 @@
                         f1.write(JSON.stringify(data));
                         */
                         var jsonObj = data;
+                        var sha = new Set();
+
                         document.getElementById("result-num").innerHTML = jsonObj.total_count + " code results";
                         for (x in jsonObj.items) {
                             var item = jsonObj.items[x];
+                            console.log(item.sha);
+                            if (sha.has(item.sha)) {
+                                continue;
+                            }
+                            else {
+                                sha.add(item.sha);
+                            }
                             var root = document.createElement("div");
                             root.classList.add("py-4");
                             var subRoot = document.createElement("div");
@@ -362,7 +371,11 @@
                                 var td = document.createElement("td");
                                 td.classList.add("blob-code", "blob-code-inner");
                                 var tdText = document.createTextNode(item.text_matches[y].fragment);
-                                td.appendChild(tdText)
+                                var _pre = document.createElement("pre");
+                                _pre.appendChild(tdText);
+                                td.appendChild(_pre)
+                                var line = document.createElement("br");
+                                td.appendChild(line)
                                 tr.appendChild(td);
                                 textTbody.appendChild(tr);
                             }

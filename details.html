@@ -220,18 +220,20 @@
                 -->
                 </div>
                 <div class="paginate-container codesearch-pagination-container">
-                    <div role="navigation" aria-label="Pagination" class="d-flex d-md-inline-block pagination"
+                    <div id="pagination" aria-label="Pagination" class="d-flex d-md-inline-block pagination"
                         data-pjax="true">
-                        <span class="previous_page disabled">Previous</span> <em class="current"
-                            data-total-pages="100">1</em>
-                        <a rel="next" aria-label="Page 2" href="/search?p=2&amp;q=boost&amp;type=Code">2</a> <a
-                            aria-label="Page 3" href="/search?p=3&amp;q=boost&amp;type=Code">3</a> <a
-                            aria-label="Page 4" href="/search?p=4&amp;q=boost&amp;type=Code">4</a> <a
-                            aria-label="Page 5" href="/search?p=5&amp;q=boost&amp;type=Code">5</a> <span
-                            class="gap">…</span> <a aria-label="Page 99"
-                            href="/search?p=99&amp;q=boost&amp;type=Code">99</a> <a aria-label="Page 100"
-                            href="/search?p=100&amp;q=boost&amp;type=Code">100</a> <a class="next_page" rel="next"
-                            href="/search?p=2&amp;q=boost&amp;type=Code">Next </a>
+                        <!--
+                        <span class="previous_page disabled">Previous</span>
+                        <em class="current" data-total-pages="100">1</em>
+                        <a rel="next" aria-label="Page 2" href="/search?p=2&amp;q=boost&amp;type=Code">2</a>
+                        <a aria-label="Page 3" href="/search?p=3&amp;q=boost&amp;type=Code">3</a>
+                        <a aria-label="Page 4" href="/search?p=4&amp;q=boost&amp;type=Code">4</a>
+                        <a aria-label="Page 5" href="/search?p=5&amp;q=boost&amp;type=Code">5</a>
+                        <span class="gap">…</span>
+                        <a aria-label="Page 99" href="/search?p=99&amp;q=boost&amp;type=Code">99</a>
+                        <a aria-label="Page 100" href="/search?p=100&amp;q=boost&amp;type=Code">100</a>
+                        <a class="next_page" rel="next" href="/search?p=2&amp;q=boost&amp;type=Code">Next </a>
+-->
                     </div>
                 </div>
             </div>
@@ -244,34 +246,7 @@
             var btn = document.getElementById("btn");
             var url = 'https://api.github.com/search/code?q=';
             var param = getQueryVariable("search");
-
-
-
-            //监听输入框的keuup事件，
-            /*
-            searchMsg.onkeyup = function () {
-                if (this.value) {
-                    show(list);
-                    // 动态创建script标签，使用百度提供的接口，将查询字符串编码后，写到src当中
-                    var s = document.createElement('script');
-                    s.src = 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=' + encodeURI(this.value.trim()) + '&json=1&p=3&sid=1457_21105_17001_22158&req=2&csor=1&pwd=7&cb=fn';
-                    // 插入到文档后获取jsonp格式的数据，然后调用callback函数，将data数据以参数的形式传入
-                    document.body.appendChild(s);
-                } else {
-                    hide(list);
-                }
-            }
-     
-            //点击li标签后把输入框的信息填入到文本框
-            list.onclick = function (e) {
-                var e = e || window.event;
-                var target = e.target || e.srcElement;
-                if (target.nodeName == "LI") {
-                    searchMsg.value = target.innerHTML;
-                }
-                hide(list)
-            }
-            */
+            var totalPage = 0;
 
             function getQueryVariable(variable) {
                 var query = window.location.search.substring(1);
@@ -283,11 +258,11 @@
                 return (false);
             }
 
-            /*
             $().ready(function () {
                 $("#searchMsg").val(param);
-                var tmp = url + param + "+in:file";
-     
+                var current = getQueryVariable("p");
+                var tmp = url + param + "+in:file&access_token=xxxxxxxxx&page=" + current + "&per_page=10";
+
                 $.ajax({
                     url: tmp,
                     headers: {
@@ -295,123 +270,223 @@
                     },
                     type: "get",
                     success: function (data) {
-                        alert(JSON.stringify(data));
+                        handleData(data);
+                        page(parseInt(current), totalPage, 2);
                     }
                 });
+
             })
-            */
+
             //点击百度一下按钮跳转到相应的页面
             btn.onclick = function () {
-                $("#searchMsg").val(param);
-                var tmp = url + param + "+in:file&page=0&per_page=10";
-
-                $.ajax({
-                    url: tmp,
-                    headers: {
-                        Accept: "application/vnd.github.v3.text-match+json"
-                    },
-                    type: "get",
-                    success: function (data) {
-                        /* 保存本地文件用于调试，IE支持
-                        var fso;
-                        try {
-                            fso = new ActiveXObject("Scripting.FileSystemObject");
-                        } catch (e) {
-                            alert("当前浏览器不支持");
-                            return;
-                        }
-                        var f1 = fso.createtextfile("E:\\json.txt", true);
-                        f1.write(JSON.stringify(data));
-                        */
-                        var jsonObj = data;
-                        var sha = new Set();
-
-                        document.getElementById("result-num").innerHTML = jsonObj.total_count + " code results";
-                        for (x in jsonObj.items) {
-                            var item = jsonObj.items[x];
-                            console.log(item.sha);
-                            if (sha.has(item.sha)) {
-                                continue;
-                            }
-                            else {
-                                sha.add(item.sha);
-                            }
-                            var root = document.createElement("div");
-                            root.classList.add("py-4");
-                            var subRoot = document.createElement("div");
-                            subRoot.classList.add("width-full");
-                            // repo
-                            var repoDiv = document.createElement("div");
-                            repoDiv.classList.add("flex-shrink-0", "text-bold", "text-small");
-                            var repoHerf = document.createElement("a");
-                            var linkText = document.createTextNode(item.repository.full_name);
-                            repoHerf.appendChild(linkText);
-                            repoHerf.classList.add("link-gray");
-                            repoHerf.href = item.repository.html_url;
-                            repoDiv.appendChild(repoHerf);
-                            subRoot.appendChild(repoDiv);
-
-                            // path
-                            var pathDiv = document.createElement("div");
-                            pathDiv.classList.add("f4", "text-normal");
-                            var filePath = document.createElement("a");
-                            var alinkText = document.createTextNode(item.path);
-                            filePath.appendChild(alinkText);
-                            filePath.href = item.html_url;
-                            pathDiv.appendChild(filePath);
-                            subRoot.appendChild(pathDiv);
-
-                            // text match
-                            var textDiv = document.createElement("div");
-                            textDiv.classList.add("file-box", "blob-wrapper", "my-1");
-                            var textTable = document.createElement("Table");
-                            var textTbody = document.createElement("Tbody");
-                            for (y in item.text_matches) {
-                                var tr = document.createElement("tr");
-                                var td = document.createElement("td");
-                                td.classList.add("blob-code", "blob-code-inner");
-                                var tdText = document.createTextNode(item.text_matches[y].fragment);
-                                var _pre = document.createElement("pre");
-                                _pre.appendChild(tdText);
-                                td.appendChild(_pre)
-                                var line = document.createElement("br");
-                                td.appendChild(line)
-                                tr.appendChild(td);
-                                textTbody.appendChild(tr);
-                            }
-                            textTable.appendChild(textTbody);
-                            textDiv.appendChild(textTable);
-                            subRoot.appendChild(textDiv);
-
-                            root.appendChild(subRoot);
-                            document.getElementById("code_search_results").appendChild(root);
-                        }
-                    }
-                });
+                location.href = "details.html?search=" + searchMsg.value + "&p=1";
             }
 
+            function page(current, total, around) {
+                let result = [];
+                let baseCount = around * 2 + 1 + 2 + 2 + 2; //总共元素个数
+                let surplus = baseCount - 4; // 只出现一个省略号 剩余元素个数
+                let starPosition = 1 + 2 + around + 1; //前面出现省略号的临界点
+                let endPosition = total - 2 - around - 1; // 后面出现省略号的临界点
+                var localUrl = window.location.origin + window.location.pathname + "?search=" + param;
 
-            function fn(data) {
-                var lis = document.querySelectorAll('li');
-                //这时候遍历查询到的信息，放到li标签当中
-                data.s.forEach(function (item, index) {
-                    lis[index].innerHTML = item;
-                });
+                var pagination = document.getElementById("pagination");
+                // Previous
+                if (current == 1) {
+                    var pre = document.createElement("span");
+                    pre.classList.add("previous_page", "disabled");
+                    var linkText = document.createTextNode("Previous");
+                    pre.appendChild(linkText);
+                    pagination.appendChild(pre);
+                }
+                else {
+                    var pre = document.createElement("a");
+                    pre.classList.add("previous_page");
+                    pre.href = localUrl + "&p=" + (current - 1).toString();
+                    var linkText = document.createTextNode("Previous");
+                    pre.appendChild(linkText);
+                    pagination.appendChild(pre);
+                }
 
-                // 获取到数据后，把脚本删除
-                var s = document.querySelectorAll('script');
-                for (var i = 1, len = s.length; i < len; i++) {
-                    document.body.removeChild(s[i]);
+                if (total <= baseCount - 2) { // 全显示
+                    for (var i = 1; i <= total; i++) {
+                        if (i == current) {
+                            var cur = document.createElement("em");
+                            cur.classList.add("current");
+                            var linkText = document.createTextNode(i);
+                            cur.appendChild(linkText);
+                            pagination.appendChild(cur);
+                        }
+                        else {
+                            createPageNode(i, pagination);
+                        }
+                    }
+
+                }
+                else { // 需要出现省略号
+                    if (current < starPosition) { //1.只有后面出现省略号
+                        for (var i = 1; i <= surplus; i++) {
+                            createPageNode(i, pagination);
+                        }
+                        var gap = document.createElement("span");
+                        gap.classList.add("gap");
+                        var linkText = document.createTextNode("...");
+                        gap.appendChild(linkText);
+                        pagination.appendChild(gap);
+
+                        createPageNode(total, pagination);
+
+                    }
+                    else if (current > endPosition) { //2.只有前面出现省略号
+                        createPageNode(1, pagination);
+
+                        var gap = document.createElement("span");
+                        gap.classList.add("gap");
+                        var linkText = document.createTextNode("...");
+                        gap.appendChild(linkText);
+                        pagination.appendChild(gap);
+
+                        for (var i = (toatl - surplus - 1); i <= total; i++) {
+                            createPageNode(i, pagination);
+                        }
+
+                    }
+                    else { //3.两边都有省略号
+                        createPageNode(1, pagination);
+
+                        var gap1 = document.createElement("span");
+                        gap1.classList.add("gap");
+                        var linkText1 = document.createTextNode("...");
+                        gap1.appendChild(linkText1);
+                        pagination.appendChild(gap1);
+
+                        for (var i = (current - around); i <= (current + around); i++) {
+                            createPageNode(i, pagination);
+                        }
+
+                        var gap2 = document.createElement("span");
+                        gap2.classList.add("gap");
+                        var linkText2 = document.createTextNode("...");
+                        gap2.appendChild(linkText2);
+                        pagination.appendChild(gap2);
+
+                        createPageNode(total, pagination);
+                    }
+                }
+
+                // Next
+                if (current == total) {
+                    var next = document.createElement("span");
+                    next.classList.add("next_page", "disabled");
+                    var linkText = document.createTextNode("Next");
+                    next.appendChild(linkText);
+                    pagination.appendChild(next);
+                }
+                else {
+                    var next = document.createElement("a");
+                    next.classList.add("next_page");
+                    next.href = localUrl + "&p=" + (current + 1).toString();
+                    var linkText = document.createTextNode("Next");
+                    next.appendChild(linkText);
+                    pagination.appendChild(next);
+                }
+
+            }
+
+            function createPageNode(i, father) {
+                var localUrl = window.location.origin + window.location.pathname + "?search=" + param;
+                var page = document.createElement("a");
+                page.href = localUrl + "&p=" + i;
+                var linkText = document.createTextNode(i);
+                page.appendChild(linkText);
+                father.appendChild(page);
+            }
+
+            function handleData(data) {
+                /* 保存本地文件用于调试，IE支持
+                var fso;
+                try {
+                        fso = new ActiveXObject("Scripting.FileSystemObject");
+                } catch (e) {
+                        alert("当前浏览器不支持");
+                    return;
+                }
+                var f1 = fso.createtextfile("E:\\json.txt", true);
+                f1.write(JSON.stringify(data));
+                */
+                var jsonObj = data;
+                var sha = new Set();
+
+                if (jsonObj.total_count >= 1000) {
+                    totalPage = 100;
+                }
+                else {
+                    totalPage = jsonObj.total_count / 10 + 1;
+                }
+
+                document.getElementById("result-num").innerHTML = jsonObj.total_count + " code results";
+                for (x in jsonObj.items) {
+                    var item = jsonObj.items[x];
+                    console.log(item.sha);
+                    if (sha.has(item.sha)) {
+                        continue;
+                    }
+                    else {
+                        sha.add(item.sha);
+                    }
+                    var root = document.createElement("div");
+                    root.classList.add("py-4");
+                    var subRoot = document.createElement("div");
+                    subRoot.classList.add("width-full");
+                    // repo
+                    var repoDiv = document.createElement("div");
+                    repoDiv.classList.add("flex-shrink-0", "text-bold", "text-small");
+                    var repoHerf = document.createElement("a");
+                    var linkText = document.createTextNode(item.repository.full_name);
+                    repoHerf.appendChild(linkText);
+                    repoHerf.classList.add("link-gray");
+                    repoHerf.href = item.repository.html_url;
+                    repoDiv.appendChild(repoHerf);
+                    subRoot.appendChild(repoDiv);
+
+                    // path
+                    var pathDiv = document.createElement("div");
+                    pathDiv.classList.add("f4", "text-normal");
+                    var filePath = document.createElement("a");
+                    var alinkText = document.createTextNode(item.path);
+                    filePath.appendChild(alinkText);
+                    filePath.href = item.html_url;
+                    pathDiv.appendChild(filePath);
+                    subRoot.appendChild(pathDiv);
+
+                    // text match
+                    var textDiv = document.createElement("div");
+                    textDiv.classList.add("file-box", "blob-wrapper", "my-1");
+                    var textTable = document.createElement("Table");
+                    var textTbody = document.createElement("Tbody");
+                    for (y in item.text_matches) {
+                        var tr = document.createElement("tr");
+                        var td = document.createElement("td");
+                        td.classList.add("blob-code", "blob-code-inner");
+                        var tdText = document.createTextNode(item.text_matches[y].fragment);
+                        var _pre = document.createElement("pre");
+                        _pre.appendChild(tdText);
+                        td.appendChild(_pre);
+                        var line = document.createElement("br");
+                        td.appendChild(line);
+                        tr.appendChild(td);
+                        textTbody.appendChild(tr);
+                    }
+                    textTable.appendChild(textTbody);
+                    textDiv.appendChild(textTable);
+                    subRoot.appendChild(textDiv);
+
+                    root.appendChild(subRoot);
+                    document.getElementById("code_search_results").appendChild(root);
+
                 }
             }
 
-            function hide(obj) {
-                obj.style.display = "none"
-            }
-
-            function show(obj) {
-                obj.style.display = "block"
-            }
         </script>
 </body>
 

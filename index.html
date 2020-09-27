@@ -122,11 +122,12 @@
             //alert("test")
             //$.get(tmp, function (data) {
             //alert(JSON.stringify(data));
-            location.href = "details.html?search=" + searchMsg.value
+            location.href = "details.html?search=" + searchMsg.value + "&p=1";
             //});
         }
 
 
+        /*
         function fn(data) {
             var lis = document.querySelectorAll('li');
             //这时候遍历查询到的信息，放到li标签当中
@@ -140,6 +141,7 @@
                 document.body.removeChild(s[i]);
             }
         }
+        */
 
         function hide(obj) {
             obj.style.display = "none"
